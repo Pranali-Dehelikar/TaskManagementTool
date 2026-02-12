@@ -1,0 +1,66 @@
+.profile-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.profile-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eaeaea;
+}
+
+.profile-title {
+  font-size: 24px;
+  margin-bottom: 25px;
+  color: #222;
+  font-weight: 600;
+  text-align: center;
+}
+
+.profile-field {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: #f8f9fc;
+  margin-bottom: 15px;
+  border: 1px solid #e5e5e5;
+}
+
+.profile-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.profile-value {
+  color: #111;
+  font-weight: 500;
+}
+
+.profile-back-button {
+  margin-top: 25px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #d5cc4b;
+  border: 2px solid red;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-back-button:hover {
+  background-color: rgba(128, 128, 128, 0.667);
+  border: 2px solid white;
+  color: #000000cc;
+}
+
+.profile-back-button:active {
+  transform: scale(0.98);
+}

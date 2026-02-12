@@ -1,0 +1,144 @@
+.dashboard-layout {
+  display: flex;
+  gap: 10px;   /* ⬅️ smaller gap = chart moves left */
+  padding: 20px;
+}
+
+.dashboard-left {
+  flex: 3;
+}
+
+.dashboard-right {
+  flex: 1;
+  min-width: 500px;
+
+}
+
+/* Blur main content until user logs in */
+.blurred {
+  filter: blur(5px);
+  pointer-events: none;  /* disable clicks */
+  user-select: none;     /* prevent text selection */
+  transition: filter 0.3s ease;
+}
+
+/* Center the login/register form overlay */
+.auth-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6); /* semi-transparent overlay */
+  backdrop-filter: blur(2px);
+  z-index: 9999;                         /* on top of everything */
+}
+
+/* ================= Dark Mode Variables ================= */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --card-bg: #f4f4f4;
+  --border-color: #dddddd;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #eaeaea;
+  --card-bg: #1e1e1e;
+  --border-color: #333333;
+}
+
+/* Apply variables */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Optional: style dashboard cards, charts, etc. */
+.dashboard-left,
+.dashboard-right,
+.main-content,
+.navbar,
+.top-navbar {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Default light theme */
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+  --navbar-bg: #f5f5f5;
+  --navbar-text: #000;
+  --button-bg: #e0e0e0;
+  --button-text: #000;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #fff;
+  --navbar-bg: #1f1f1f;
+  --navbar-text: #fff;
+  --button-bg: #333;
+  --button-text: #fff;
+}
+
+/* Apply variables globally */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Vertical Navbar */
+.navbar {
+  background-color: var(--navbar-bg);
+  color: var(--navbar-text);
+}
+
+/* Navbar buttons */
+.navbar .nav-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+/* -------------------------
+   DARK MODE STYLES
+------------------------- */
+
+/* Global dark mode */
+body[data-theme="dark"] {
+  background-color: #1e1e1e;   /* dark background */
+  color: #f0f0f0;              /* default text color */
+}
+
+/* Inputs in dark mode */
+body[data-theme="dark"] input,
+body[data-theme="dark"] select,
+body[data-theme="dark"] textarea {
+  background-color: #2c2c2c;   /* slightly lighter dark */
+  color: #f0f0f0;              /* light text */
+  border: 1px solid #555;      /* visible border */
+}
+
+/* Placeholder text */
+body[data-theme="dark"] ::placeholder {
+  color: #aaa;
+}
+

@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f3f4f6;
+}
+
+.app-container {
+  display: flex;
+}
+
+.main-content {
+  margin-left: 220px; /* same as sidebar width */
+  padding: 20px;
+  width: calc(100% - 220px);
+  min-height: 100vh;
+  background-color: #f3f4f6; /* light background */
+}
+
+body {
+  background-color: #f5f6fa;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-content {
+  margin-top: 70px;
+}

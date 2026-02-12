@@ -1,0 +1,108 @@
+/* ===== Main container ===== */
+.report-container {
+  padding: 24px 32px;
+  background-color: #f5f7fb;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ===== Header ===== */
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.report-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+/* ===== Download button ===== */
+.download-btn {
+  padding: 10px 20px;
+  border: 2px solid red;
+  background-color: #d5cc4b;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+.download-btn:hover {
+  background-color: rgba(128, 128, 128, 0.667);
+  border: 2px solid white;
+  color: #000000cc;
+}
+
+.download-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ===== Charts grid ===== */
+.report-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 22px;
+}
+
+/* ===== Individual chart card ===== */
+.chart-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px 16px 20px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Chart title */
+.chart-card h3 {
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #34495e;
+  text-align: center;
+}
+
+/* Prevent charts from overflowing */
+.chart-card svg {
+  overflow: visible;
+}
+
+/* ===== Polar labels ===== */
+.polar-labels {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  font-size: 13px;
+}
+
+.polar-labels span {
+  font-weight: 600;
+}
+
+/* ===== Responsive tweaks ===== */
+@media (max-width: 768px) {
+  .report-container {
+    padding: 16px;
+  }
+
+  .report-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .download-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

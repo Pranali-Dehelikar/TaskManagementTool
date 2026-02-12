@@ -1,0 +1,127 @@
+.settings-window {
+  max-width: 1200px; /* optional */
+  margin: 10px auto;
+  padding: 25px;
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  font-family: 'Arial', sans-serif;
+  color: var(--text-color); /* use variable for text */
+}
+
+/* Title */
+.settings-window h2 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 25px;
+  color: var(--title-color); /* dynamic */
+}
+
+/* GRID CONTAINER */
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 per row */
+  gap: 25px;
+  flex: 1;
+}
+
+/* EACH SQUARE BOX */
+.settings-card {
+  background-color: #ffffff;
+  border: 1px solid red;
+  border-radius: 8px;   /* Square look (not rounded heavy) */
+  height: 150px;
+  width: 200px; ;        /* Makes it square-like */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* Hover Effect */
+.settings-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  background-color: rgba(128, 128, 128, 0.667);
+  border: 2px solid white;
+  color: #000000cc;
+}
+
+/* Icon */
+.settings-card svg {
+  font-size: 35px;
+  margin-bottom: 15px;
+  color: #007bff;
+}
+
+/* Title Text */
+.settings-card span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Logout Button Styled as Card */
+.logout-card {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.logout-card svg {
+  color: white;
+}
+
+.logout-card:hover {
+  background-color: #e04344;
+  border-color: #e04344;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .settings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Centered Logout */
+.logout-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.logout-button {
+  width: 250px;
+  height: 80px;
+  padding: 14px;
+  background-color: #ff4d4f;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border: 2px solid yellow;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease;
+}
+
+.logout-button svg {
+  margin-right: 8px;
+}
+
+.logout-button:hover {
+  background-color: rgb(220, 216, 210);
+  color: black;
+  border: 2px solid #ff4d4f;
+}
