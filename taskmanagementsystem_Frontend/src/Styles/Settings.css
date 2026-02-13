@@ -1,85 +1,140 @@
+/* ===================== */
+/* LIGHT MODE */
+/* ===================== */
+
 .settings-window {
-  max-width: 1200px; /* optional */
-  margin: 10px auto;
+  max-width: 1200px;
+  margin-top: 0.5px;
   padding: 25px;
-  background-color: var(--bg-color);
+  background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  font-family: 'Arial', sans-serif;
-  color: var(--text-color); /* use variable for text */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+  color: #111111;
 }
 
-/* Title */
 .settings-window h2 {
   text-align: center;
-  font-size: 26px;
+  font-size: 30px;
   margin-bottom: 25px;
-  color: var(--title-color); /* dynamic */
+  margin-right: 1cm;
 }
 
-/* GRID CONTAINER */
+/* GRID */
 .settings-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 per row */
+  grid-template-columns: repeat(4, 1fr);
   gap: 25px;
-  flex: 1;
 }
 
-/* EACH SQUARE BOX */
+/* CARD */
 .settings-card {
   background-color: #ffffff;
-  border: 1px solid red;
-  border-radius: 8px;   /* Square look (not rounded heavy) */
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
   height: 150px;
-  width: 200px; ;        /* Makes it square-like */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: 0.25s ease;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* Hover Effect */
 .settings-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-  background-color: rgba(128, 128, 128, 0.667);
-  border: 2px solid white;
-  color: #000000cc;
 }
 
-/* Icon */
 .settings-card svg {
   font-size: 35px;
   margin-bottom: 15px;
   color: #007bff;
 }
 
-/* Title Text */
 .settings-card span {
   font-size: 18px;
   font-weight: 600;
-  color: #333;
 }
 
-/* Logout Button Styled as Card */
-.logout-card {
+/* LOGOUT */
+.logout-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.logout-button {
+  width: 250px;
+  height: 80px;
   background-color: #ff4d4f;
-  color: white;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.logout-card svg {
-  color: white;
+.logout-button svg {
+  margin-right: 8px;
 }
 
-.logout-card:hover {
+.logout-button:hover {
   background-color: #e04344;
-  border-color: #e04344;
 }
 
-/* Responsive */
+/* ===================== */
+/* DARK MODE */
+/* ===================== */
+
+.settings-window.dark {
+  background-color: #00000007;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
+}
+
+.settings-window.dark h2{
+   color:  #d2c296;
+}
+
+.settings-window.dark .settings-card {
+  background-color: gray;
+  border: 1px solid #222222;
+  color: #ffffff;
+  border: 2px solid white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.settings-window.dark .settings-card span {
+  color: #ffffff;
+}
+
+.settings-window.dark .settings-card svg {
+  color: #4dabff;
+}
+
+.settings-window.dark .settings-card:hover {
+  background-color: #1a1a1a;
+  border: 1px solid #4dabff;
+}
+
+.settings-window.dark .logout-button {
+  background-color: #b91c1c;
+}
+
+.settings-window.dark .logout-button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* RESPONSIVE */
+
 @media (max-width: 1024px) {
   .settings-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -90,38 +145,4 @@
   .settings-grid {
     grid-template-columns: 1fr;
   }
-}
-
-/* Centered Logout */
-.logout-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-}
-
-.logout-button {
-  width: 250px;
-  height: 80px;
-  padding: 14px;
-  background-color: #ff4d4f;
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
-  border: 2px solid yellow;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.2s ease;
-}
-
-.logout-button svg {
-  margin-right: 8px;
-}
-
-.logout-button:hover {
-  background-color: rgb(220, 216, 210);
-  color: black;
-  border: 2px solid #ff4d4f;
 }

@@ -1,6 +1,6 @@
 package com.TaskManagementTool.Controller;
 
-import com.TaskManagementTool.Config.JwtUtil;
+import com.TaskManagementTool.Service.JwtService;
 import com.TaskManagementTool.DTO.*;
 import com.TaskManagementTool.Entity.User;
 import com.TaskManagementTool.Service.UserService;
@@ -15,7 +15,7 @@ public class AuthController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
-    private final JwtUtil jwtUtil;
+    private final JwtService jwtUtil;
 
     // REGISTER
     @PostMapping("/register")

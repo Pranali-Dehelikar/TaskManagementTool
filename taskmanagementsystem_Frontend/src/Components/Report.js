@@ -19,7 +19,7 @@ import {
   ComposedChart,
 } from "recharts";
 
-const Report = ({ tasks = [] }) => {
+const Report = ({ tasks = [], darkMode }) => {
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#00C49F", "#FF8042"];
 
   /* ================= DOWNLOAD PDF ================= */
@@ -55,7 +55,6 @@ const Report = ({ tasks = [] }) => {
 
   /* ================= DATA PREP ================= */
 
-  // 1. Tasks by Status
   const statusCounts = tasks.reduce((acc, t) => {
     acc[t.status] = (acc[t.status] || 0) + 1;
     return acc;
@@ -76,7 +75,6 @@ const Report = ({ tasks = [] }) => {
     { name: "DONE", value: statusCounts.DONE || 0, fill: "#ffc658" },
   ];
 
-  // 2. Tasks per User (Pie without Cell)
   const userCounts = tasks.reduce((acc, t) => {
     if (t.assignedTo) {
       acc[t.assignedTo] = (acc[t.assignedTo] || 0) + 1;
@@ -90,7 +88,6 @@ const Report = ({ tasks = [] }) => {
     fill: COLORS[i % COLORS.length],
   }));
 
-  // 3. Completion Trend
   const dateCounts = tasks.reduce((acc, t) => {
     if (t.completedAt) {
       const date = t.completedAt.split("T")[0];
@@ -118,10 +115,16 @@ const Report = ({ tasks = [] }) => {
     areaData.push({ date: "No Data", cumulative: 0 });
   }
 
-  /* ================= UI ================= */
+  const gridColor = darkMode ? "#555" : "#ccc";
+  const axisColor = darkMode ? "#ddd" : "#333";
+  const tooltipStyle = {
+    backgroundColor: darkMode ? "#2a2a3d" : "#fff",
+    border: "none",
+    color: darkMode ? "#fff" : "#000",
+  };
 
   return (
-    <div className="report-container">
+    <div className={`report-container ${darkMode ? "dark" : ""}`}>
       <div className="report-header">
         <h2>Task Reports</h2>
         <button className="download-btn" onClick={downloadReport}>
@@ -130,14 +133,14 @@ const Report = ({ tasks = [] }) => {
       </div>
 
       <div className="report-charts">
-        {/* 1. Bar Chart */}
+        {/* Bar Chart */}
         <div className="chart-card">
           <h3>Tasks by Status</h3>
           <BarChart width={350} height={250} data={statusData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
+            <CartesianGrid stroke={gridColor} strokeDasharray="3 3" />
+            <XAxis dataKey="name" stroke={axisColor} />
+            <YAxis stroke={axisColor} />
+            <Tooltip contentStyle={tooltipStyle} />
             <Legend />
             <Bar dataKey="TODO" fill="#8884d8" />
             <Bar dataKey="IN_PROGRESS" fill="#82ca9d" />
@@ -145,24 +148,8 @@ const Report = ({ tasks = [] }) => {
           </BarChart>
         </div>
 
-        {/* 2. Pie Chart (NO Cell) */}
-        <div className="chart-card">
-          <h3>Tasks per User</h3>
-          <PieChart width={350} height={250}>
-            <Pie
-              data={userData}
-              cx="50%"
-              cy="50%"
-              outerRadius={80}
-              dataKey="count"
-              label
-            />
-            <Tooltip />
-            <Legend />
-          </PieChart>
-        </div>
 
-        {/* 3. Radial Bar */}
+        {/* Radial */}
         <div className="chart-card">
           <h3>Status Distribution</h3>
           <RadialBarChart
@@ -177,7 +164,7 @@ const Report = ({ tasks = [] }) => {
             endAngle={0}
           >
             <RadialBar dataKey="value" background />
-            <Tooltip />
+            <Tooltip contentStyle={tooltipStyle} />
           </RadialBarChart>
 
           <div className="polar-labels">
@@ -189,39 +176,29 @@ const Report = ({ tasks = [] }) => {
           </div>
         </div>
 
-        {/* 4. Line Chart */}
+        {/* Line */}
         <div className="chart-card">
           <h3>Completion Trend</h3>
           <LineChart width={350} height={250} data={lineData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
+            <CartesianGrid stroke={gridColor} strokeDasharray="3 3" />
+            <XAxis dataKey="date" stroke={axisColor} />
+            <YAxis stroke={axisColor} />
+            <Tooltip contentStyle={tooltipStyle} />
             <Legend />
             <Line dataKey="completed" stroke="#82ca9d" strokeWidth={3} />
           </LineChart>
         </div>
 
-        {/* 5. Area Chart */}
-        <div className="chart-card">
-          <h3>Cumulative Completion</h3>
-          <AreaChart width={350} height={250} data={areaData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Area dataKey="cumulative" stroke="#8884d8" fill="#8884d8" />
-          </AreaChart>
-        </div>
+     
 
-        {/* 6. Composed Chart */}
+        {/* Composed */}
         <div className="chart-card">
           <h3>Status vs Trend</h3>
           <ComposedChart width={350} height={250} data={lineData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
+            <CartesianGrid stroke={gridColor} strokeDasharray="3 3" />
+            <XAxis dataKey="date" stroke={axisColor} />
+            <YAxis stroke={axisColor} />
+            <Tooltip contentStyle={tooltipStyle} />
             <Legend />
             <Bar dataKey="completed" barSize={20} fill="#82ca9d" />
             <Line dataKey="completed" stroke="#8884d8" />

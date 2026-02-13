@@ -1,24 +1,29 @@
+/* ============================= */
+/* LIGHT MODE (default) */
+/* ============================= */
+
 /* Container */
 .task-list-container {
-  padding: 16px;                 /* reduce padding */
+  padding: 16px;
   margin-top: 0.1cm;
-  margin-left: 0cm;              /* sidebar (220px) + small gap */
+  margin-left: 0cm;
   margin-right: 40px;
 
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 
-  max-width: 600px;              /* REDUCE table width */
+  max-width: 600px;
   font-family: Arial, sans-serif;
+  border: 2px solid black;
 }
 
 /* Heading */
 .task-list-container h2 {
-  margin-left: 5cm;       /* center Task List text */
+  margin-left: 5cm;
   margin-bottom: 16px;
   font-size: 22px;
-  color: #111827;
+  color: #111827; /* black in light mode */
 }
 
 /* Messages */
@@ -37,7 +42,7 @@
 .task-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;               /* slightly smaller text */
+  font-size: 14px;
 }
 
 /* Table Head */
@@ -92,3 +97,86 @@
   color: #065f46;
 }
 
+/* ============================= */
+/* TASK FORM LIGHT MODE */
+/* ============================= */
+.form-container {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333; /* black heading */
+}
+
+/* ============================= */
+/* DARK MODE */
+/* ============================= */
+.dark .task-list-container,
+.dark .form-container {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  border: 2px solid whitesmoke;
+}
+
+.dark .task-list-container h2,
+.dark .form-card h2 {
+  color: #d2c296; /* yellow heading in dark mode */
+}
+
+/* Table dark mode */
+.dark .task-table th {
+  background-color: #333;
+  color: #ffffff;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.dark .task-table td {
+  color:whitesmoke;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.dark .task-table tbody tr:hover {
+  background-color: #1a1a1a0c;
+}
+
+/* Status badges in dark mode */
+.dark .status.TODO {
+  background-color: #7c2d12;
+  color: #fed7aa;
+}
+
+.dark .status.IN_PROGRESS {
+  background-color: #1e3a8a;
+  color: #bfdbfe;
+}
+
+.dark .status.DONE {
+  background-color: #064e3b;
+  color: #a7f3d0;
+}
+
+/* Form dark mode inputs and buttons */
+.dark .form-input,
+.dark .form-select {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.dark .form-button {
+  background-color: #f7c948;
+  color: #000;
+}
+
+.dark .form-button:hover {
+  background-color: #e6b83b;
+}

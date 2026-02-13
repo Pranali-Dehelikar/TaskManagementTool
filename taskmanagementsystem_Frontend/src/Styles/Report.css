@@ -1,12 +1,11 @@
-/* ===== Main container ===== */
 .report-container {
   padding: 24px 32px;
   background-color: #f5f7fb;
   min-height: 100vh;
   box-sizing: border-box;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* ===== Header ===== */
 .report-header {
   display: flex;
   justify-content: space-between;
@@ -15,13 +14,12 @@
 }
 
 .report-header h2 {
-  margin: 0;
+  margin: 0 0 0 12cm;
   font-size: 24px;
   font-weight: 700;
   color: #2c3e50;
 }
 
-/* ===== Download button ===== */
 .download-btn {
   padding: 10px 20px;
   border: 2px solid red;
@@ -30,7 +28,7 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.2s, border 0.2s, color 0.2s;
+  transition: 0.2s ease;
 }
 
 .download-btn:hover {
@@ -39,19 +37,13 @@
   color: #000000cc;
 }
 
-.download-btn:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-/* ===== Charts grid ===== */
 .report-charts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 22px;
+  
 }
 
-/* ===== Individual chart card ===== */
 .chart-card {
   background: #ffffff;
   border-radius: 14px;
@@ -60,9 +52,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: 0.3s ease;
+  border: 2px solid black;
 }
 
-/* Chart title */
 .chart-card h3 {
   margin-bottom: 12px;
   font-size: 15px;
@@ -71,12 +64,6 @@
   text-align: center;
 }
 
-/* Prevent charts from overflowing */
-.chart-card svg {
-  overflow: visible;
-}
-
-/* ===== Polar labels ===== */
 .polar-labels {
   margin-top: 12px;
   display: flex;
@@ -89,7 +76,47 @@
   font-weight: 600;
 }
 
-/* ===== Responsive tweaks ===== */
+/* ===== DARK MODE ===== */
+
+.report-container.dark {
+  background-color: #00000007;
+  color: #f1f1f1;
+}
+
+.report-container.dark .report-header h2 {
+  color:  #d2c296;;
+}
+
+.report-container.dark .chart-card {
+  background: gray;
+  border: 2px solid whitesmoke;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.report-container.dark .chart-card :hover{
+  background: rgb(188, 216, 112);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.report-container.dark .chart-card h3 {
+  color: #e0e0e0;
+  height:100%;
+}
+
+.report-container.dark .download-btn {
+  background-color: #da2c2c;
+  border: 2px solid whitesmoke;
+  color: #fff;
+}
+
+.report-container.dark .download-btn:hover {
+  background-color: #666;
+  border-color: #888;
+  color: black;
+  transform: translate(2px, 2px); /* moves 10px right, 5px down */
+  transition: transform 0.3s ease; /* smooth movement */
+}
+
 @media (max-width: 768px) {
   .report-container {
     padding: 16px;
@@ -103,6 +130,5 @@
 
   .download-btn {
     width: 100%;
-    text-align: center;
   }
 }

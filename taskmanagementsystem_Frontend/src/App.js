@@ -21,6 +21,7 @@ import "./App.css";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
+
   const [activeComponent, setActiveComponent] = useState(
     localStorage.getItem("activeComponent") || "Auth"
   );
@@ -107,7 +108,7 @@ function App() {
     "Notification",
     "Settings",
     "Profile",
-    "ChangePassword"
+    "ChangePassword",
   ];
 
   useEffect(() => {
@@ -121,11 +122,7 @@ function App() {
   const renderComponent = () => {
     switch (activeComponent) {
       case "Auth":
-        return (
-          <AuthPage
-            onLoginSuccess={handleLoginSuccess}
-          />
-        );
+        return <AuthPage onLoginSuccess={handleLoginSuccess} />;
 
       case "Dashboard":
         return (
@@ -135,25 +132,31 @@ function App() {
                 tasks={tasks}
                 loading={loadingTasks}
                 error={taskError}
+                darkMode={darkMode}
               />
             </div>
             <div className="dashboard-right">
-              <TaskStatusChart tasks={tasks} />
+              <TaskStatusChart tasks={tasks} darkMode={darkMode} />
             </div>
           </div>
         );
 
       case "Reports":
-        return <Report tasks={tasks} />;
+        return <Report tasks={tasks} darkMode={darkMode} />;
 
       case "UserList":
-        return <UserList />;
+        return <UserList darkMode={darkMode} />;
 
       case "TaskForm":
-        return <TaskForm onTaskAdded={() => fetchTasks(searchTerm)} />;
+        return (
+          <TaskForm
+            onTaskAdded={() => fetchTasks(searchTerm)}
+            darkMode={darkMode}
+          />
+        );
 
       case "Notification":
-        return <Notification />;
+        return <Notification darkMode={darkMode} />;
 
       case "Settings":
         return (
@@ -166,10 +169,20 @@ function App() {
         );
 
       case "Profile":
-        return <Profile setActiveComponent={setActiveComponent} />;
+        return (
+          <Profile
+            setActiveComponent={setActiveComponent}
+            darkMode={darkMode}
+          />
+        );
 
       case "ChangePassword":
-        return <ChangePassword setActiveComponent={setActiveComponent} />;
+        return (
+          <ChangePassword
+            setActiveComponent={setActiveComponent}
+            darkMode={darkMode}
+          />
+        );
 
       default:
         return <AuthPage onLoginSuccess={handleLoginSuccess} />;
@@ -177,8 +190,7 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      {/* Always show navbar */}
+    <div className={`app-container ${darkMode ? "dark" : ""}`}>
       <Navbar
         activeComponent={activeComponent}
         setActiveComponent={setActiveComponent}
@@ -195,9 +207,7 @@ function App() {
         />
       )}
 
-      <div className="main-content">
-        {renderComponent()}
-      </div>
+      <div className="main-content">{renderComponent()}</div>
     </div>
   );
 }

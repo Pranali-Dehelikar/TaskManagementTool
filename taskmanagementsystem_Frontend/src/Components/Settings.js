@@ -52,33 +52,31 @@ const SettingsMenu = ({
   };
 
   return (
-  <div className="settings-window">
-    <h2>
-      <FontAwesomeIcon icon={faCogs} /> Settings
-    </h2>
+    <div className={`settings-window ${darkMode ? "dark" : ""}`}>
+      <h2>
+        <FontAwesomeIcon icon={faCogs} /> Settings
+      </h2>
 
-    <div className="settings-grid">
-      {settingsCards.map((card, index) => (
-        <div
-          key={index}
-          className="settings-card"
-          onClick={() => handleCardClick(card.title)}
-        >
-          <FontAwesomeIcon icon={card.icon} />
-          <span>{card.title}</span>
-        </div>
-      ))}
+      <div className="settings-grid">
+        {settingsCards.map((card, index) => (
+          <div
+            key={index}
+            className="settings-card"
+            onClick={() => handleCardClick(card.title)}
+          >
+            <FontAwesomeIcon icon={card.icon} />
+            <span>{card.title}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="logout-container">
+        <button className="logout-button" onClick={onLogout}>
+          <FontAwesomeIcon icon={faSignOutAlt} /> Logout
+        </button>
+      </div>
     </div>
-
-    {/* Logout Button at Bottom Center */}
-    <div className="logout-container">
-      <button className="logout-button" onClick={onLogout}>
-        <FontAwesomeIcon icon={faSignOutAlt} /> Logout
-      </button>
-    </div>
-  </div>
-);
-
+  );
 };
 
 export default SettingsMenu;

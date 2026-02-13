@@ -11,64 +11,81 @@ import {
 } from "recharts";
 import "../Styles/TaskStatusChart.css";
 
-const STATUS_COLORS = {
-  TODO: "#ef4444",         // red
-  IN_PROGRESS: "#3b82f6",  // blue
-  DONE: "#22c55e",         // green
+const STATUS_COLORS_LIGHT = {
+  TODO: "#ef4444",
+  IN_PROGRESS: "#3b82f6",
+  DONE: "#22c55e",
 };
 
-function TaskStatusChart({ tasks }) {
+const STATUS_COLORS_DARK = {
+  TODO: "#fca5a5",        // lighter red
+  IN_PROGRESS: "#60a5fa", // lighter blue
+  DONE: "#4ade80",        // lighter green
+};
+
+function TaskStatusChart({ tasks, darkMode }) {
   const data = ["TODO", "IN_PROGRESS", "DONE"].map((status) => ({
     status,
     count: tasks.filter((t) => t.status === status).length,
   }));
 
+  const colors = darkMode ? STATUS_COLORS_DARK : STATUS_COLORS_LIGHT;
+  const textColor = darkMode ? "#f3f4f6" : "#374151";
+  const gridColor = darkMode ? "#374151" : "#e5e7eb";
+  const tooltipBg = darkMode ? "#1f2937" : "#ffffff";
+  const tooltipBorder = darkMode ? "#4b5563" : "#e5e7eb";
+  const tooltipText = darkMode ? "#f3f4f6" : "#111827";
+
   return (
-    <div className="chart-container">
-      <h3 className="chart-title">Task Status</h3>
+    <div className={`chart-container ${darkMode ? "dark" : ""}`}>
+      <h3 className="chart-title">{`Task Status`}</h3>
 
       <ResponsiveContainer width="100%" height={260}>
         <BarChart
           data={data}
           margin={{ top: 20, right: 30, left: 10, bottom: 20 }}
-          barCategoryGap={30}   // ⬅️ controls spacing between bars
+          barCategoryGap={30}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid stroke={gridColor} strokeDasharray="3 3" />
 
           <XAxis
             dataKey="status"
-            tick={{ fontSize: 14, fill: "#374151", fontWeight: 600 }}
+            tick={{ fontSize: 14, fill: textColor, fontWeight: 600 }}
             axisLine={false}
             tickLine={false}
           />
 
           <YAxis
             allowDecimals={false}
-            tick={{ fontSize: 13, fill: "#374151" }}
+            tick={{ fontSize: 13, fill: textColor }}
             axisLine={false}
             tickLine={false}
           />
 
-          <Tooltip />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: tooltipBg,
+              borderColor: tooltipBorder,
+              color: tooltipText,
+            }}
+            itemStyle={{ color: tooltipText }}
+          />
 
           <Bar
             dataKey="count"
-            barSize={60}        // ⬅️ INCREASED BAR WIDTH
-            radius={[6, 6, 0, 0]} // ⬅️ rounded top
+            barSize={60}
+            radius={[6, 6, 0, 0]}
           >
             <LabelList
               dataKey="count"
               position="top"
-              fill="#374151"
+              fill={textColor}
               fontSize={14}
               fontWeight={600}
             />
 
             {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={STATUS_COLORS[entry.status]}
-              />
+              <Cell key={`cell-${index}`} fill={colors[entry.status]} />
             ))}
           </Bar>
         </BarChart>
