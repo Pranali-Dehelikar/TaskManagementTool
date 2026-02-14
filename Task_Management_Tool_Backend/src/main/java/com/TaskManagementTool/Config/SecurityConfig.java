@@ -36,7 +36,8 @@ public class SecurityConfig {
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/error").permitAll()
                                 .requestMatchers("/**").permitAll() // Temporary: allow all for testing OPTIONS / CORS
-                        //.anyRequest().authenticated() // Uncomment once JWT works
+                        .requestMatchers("/api/notifications/**").authenticated()
+                        .anyRequest().authenticated() // Uncomment once JWT works
                 );
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

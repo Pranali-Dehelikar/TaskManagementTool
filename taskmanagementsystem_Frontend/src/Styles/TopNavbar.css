@@ -203,13 +203,13 @@
 }
 
 .top-navbar.dark .nav-btn {
-  background-color: #3b82f6;
+  background-color: #785bc1;
   color: #f3f4f6;
   border: 2px solid rgb(201, 234, 13);
 }
 
 .top-navbar.dark .nav-btn.primary {
-  background-color: #3b82f6;
+  background-color: #785bc1;
   color: #fff;
   border: 2px solid rgb(201, 234, 13);
 }

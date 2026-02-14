@@ -6,7 +6,7 @@ import Report from "./Components/Report";
 import UserList from "./Components/UserList";
 import TaskForm from "./Components/TaskForm";
 import TaskList from "./Components/TaskList";
-import Notification from "./Components/Notification";
+import NotificationGrid from "./Components/NotificationGrid"; // updated import
 import Settings from "./Components/Settings";
 import TaskStatusChart from "./Components/TaskStatusChart";
 import AuthPage from "./Components/AuthPage";
@@ -21,7 +21,6 @@ import "./App.css";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
-
   const [activeComponent, setActiveComponent] = useState(
     localStorage.getItem("activeComponent") || "Auth"
   );
@@ -31,14 +30,10 @@ function App() {
   const [taskError, setTaskError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
-
+  const [darkMode, setDarkMode] = useState(localStorage.getItem("theme") === "dark");
   const isAuthenticated = !!token;
 
   /* ================= DARK MODE ================= */
-
   useEffect(() => {
     const theme = darkMode ? "dark" : "light";
     document.body.setAttribute("data-theme", theme);
@@ -46,20 +41,17 @@ function App() {
   }, [darkMode]);
 
   /* ================= SAVE ACTIVE PAGE ================= */
-
   useEffect(() => {
     localStorage.setItem("activeComponent", activeComponent);
   }, [activeComponent]);
 
   /* ================= FETCH TASKS ================= */
-
   const fetchTasks = useCallback(
     async (keyword = "") => {
       if (!token) return;
 
       try {
         setLoadingTasks(true);
-
         const res =
           keyword.trim() === ""
             ? await getAllTasks(token)
@@ -83,7 +75,6 @@ function App() {
   }, [activeComponent, searchTerm, fetchTasks, isAuthenticated]);
 
   /* ================= LOGIN ================= */
-
   const handleLoginSuccess = (jwtToken) => {
     setToken(jwtToken);
     localStorage.setItem("token", jwtToken);
@@ -91,7 +82,6 @@ function App() {
   };
 
   /* ================= LOGOUT ================= */
-
   const handleLogout = () => {
     setToken(null);
     localStorage.removeItem("token");
@@ -99,7 +89,6 @@ function App() {
   };
 
   /* ================= PROTECTED ROUTES ================= */
-
   const protectedComponents = [
     "Dashboard",
     "Reports",
@@ -118,7 +107,6 @@ function App() {
   }, [activeComponent, isAuthenticated]);
 
   /* ================= RENDER ================= */
-
   const renderComponent = () => {
     switch (activeComponent) {
       case "Auth":
@@ -148,15 +136,10 @@ function App() {
         return <UserList darkMode={darkMode} />;
 
       case "TaskForm":
-        return (
-          <TaskForm
-            onTaskAdded={() => fetchTasks(searchTerm)}
-            darkMode={darkMode}
-          />
-        );
+        return <TaskForm onTaskAdded={() => fetchTasks(searchTerm)} darkMode={darkMode} />;
 
-      case "Notification":
-        return <Notification darkMode={darkMode} />;
+     case "Notification":
+  return <NotificationGrid userId={1} darkMode={darkMode} />; // pass logged-in userId dynamically
 
       case "Settings":
         return (
@@ -169,20 +152,10 @@ function App() {
         );
 
       case "Profile":
-        return (
-          <Profile
-            setActiveComponent={setActiveComponent}
-            darkMode={darkMode}
-          />
-        );
+        return <Profile setActiveComponent={setActiveComponent} darkMode={darkMode} />;
 
       case "ChangePassword":
-        return (
-          <ChangePassword
-            setActiveComponent={setActiveComponent}
-            darkMode={darkMode}
-          />
-        );
+        return <ChangePassword setActiveComponent={setActiveComponent} darkMode={darkMode} />;
 
       default:
         return <AuthPage onLoginSuccess={handleLoginSuccess} />;

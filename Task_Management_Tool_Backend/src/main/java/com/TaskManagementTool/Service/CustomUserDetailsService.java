@@ -26,4 +26,5 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .authorities("USER")
                 .build();
     }
+
 }

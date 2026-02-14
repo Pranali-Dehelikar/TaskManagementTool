@@ -30,7 +30,7 @@
 /* CARD */
 .settings-card {
   background-color: #ffffff;
-  border: 1px solid #e5e7eb;
+  border: 2px solid black;
   border-radius: 8px;
   height: 150px;
   display: flex;
@@ -45,6 +45,8 @@
 .settings-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+   background-color: rgba(128,128,128,0.667);
+  border: 2px solid white;
 }
 
 .settings-card svg {

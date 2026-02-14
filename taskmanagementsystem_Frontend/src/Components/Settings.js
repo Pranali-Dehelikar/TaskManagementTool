@@ -32,10 +32,15 @@ const SettingsMenu = ({
     { title: "Help & About", icon: faInfoCircle }
   ];
 
+  // <-- REPLACE YOUR OLD handleCardClick WITH THIS
   const handleCardClick = (title) => {
     switch (title) {
       case "Account":
         setActiveComponent("Profile");
+        break;
+
+      case "Notifications":
+        setActiveComponent("Notification"); // triggers NotificationGrid in App.js
         break;
 
       case "Appearance":
