@@ -1,41 +1,43 @@
 package com.TaskManagementTool.Service;
 
-import com.TaskManagementTool.Entity.UserNotification;
+import com.TaskManagementTool.Entity.NotificationSettings;
+import com.TaskManagementTool.Repository.NotificationSettingsRepository;
 import com.TaskManagementTool.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 public class TaskNotificationHandler {
 
-    private final UserNotificationService notificationService;
+    private final NotificationSettingsRepository settingsRepository;
     private final EmailService emailService;
-    private final UserRepository userRepository; // your existing User repo
+    private final UserRepository userRepository;
 
     public void notifyUser(Long userId, String notificationType, String taskDetails) {
 
-        List<UserNotification> settings = notificationService.getUserNotifications(userId);
+        Optional<NotificationSettings> optionalSettings =
+                settingsRepository.findByUserIdAndNotificationType(userId, notificationType);
 
-        settings.stream()
-                .filter(n -> n.getNotificationType().equals(notificationType))
-                .findFirst()
-                .ifPresent(n -> {
-                    if (Boolean.TRUE.equals(n.getEmailEnabled())) {
-                        String userEmail = userRepository.findById(userId)
-                                .map(u -> u.getEmail())
-                                .orElse(null);
-                        if(userEmail != null) {
+        if (optionalSettings.isEmpty()) {
+            return; // no settings configured
+        }
+
+        NotificationSettings settings = optionalSettings.get();
+
+        if (settings.isEmailEnabled()) {
+
+            userRepository.findById(userId)
+                    .map(user -> user.getEmail())
+                    .ifPresent(userEmail ->
                             emailService.sendEmail(
                                     userEmail,
                                     "Task Notification: " + notificationType,
                                     "Details: " + taskDetails
-                            );
-                        }
-                    }
-                    // TODO: push/in-app notifications
-                });
+                            )
+                    );
+        }
     }
 }

@@ -25,6 +25,11 @@ public class TaskController {
         return service.getAllTasks();
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Task> getUserTasks(@PathVariable Long userId) {
+        return service.getUserTasks(userId);
+    }
+
     @GetMapping("/search")
     public List<Task> search(@RequestParam String keyword) {
         return service.searchTasks(keyword);

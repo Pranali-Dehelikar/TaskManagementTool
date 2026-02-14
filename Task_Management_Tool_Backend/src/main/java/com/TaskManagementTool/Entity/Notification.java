@@ -6,24 +6,22 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user_notifications")
+@Table(name = "notifications")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserNotification {
+public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long userId;
-    private String notificationType;
 
-    private Boolean emailEnabled = false;
-    private Boolean pushEnabled = false;
-    private Boolean inAppEnabled = false;
+    private String message;
+
+    private Boolean isRead;
 
     private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedAt = LocalDateTime.now();
 }
