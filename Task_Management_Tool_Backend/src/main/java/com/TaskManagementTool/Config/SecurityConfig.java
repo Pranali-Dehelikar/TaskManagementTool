@@ -37,6 +37,7 @@ public class SecurityConfig {
                                 .requestMatchers("/error").permitAll()
                                 .requestMatchers("/**").permitAll() // Temporary: allow all for testing OPTIONS / CORS
                         .requestMatchers("/api/notifications/**").authenticated()
+                        .requestMatchers("/api/tasks/**").authenticated()
                         .anyRequest().authenticated() // Uncomment once JWT works
                 );
 

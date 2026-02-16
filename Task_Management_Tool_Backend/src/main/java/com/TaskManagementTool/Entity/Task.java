@@ -3,6 +3,7 @@ package com.TaskManagementTool.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,7 +19,8 @@ public class Task {
     private String status;
     private Long assignedUserId;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDate dueDate;
+
 
 }
 

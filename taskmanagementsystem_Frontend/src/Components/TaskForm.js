@@ -6,8 +6,8 @@ function TaskForm({ onTaskAdded }) {
   const [task, setTask] = useState({
     title: "",
     description: "",
-    status: "TODO", // default enum
-    dueDate: "",       // must match backend LocalDate format
+    status: "TODO",
+    dueDate: "",
   });
 
   const [error, setError] = useState("");
@@ -15,43 +15,30 @@ function TaskForm({ onTaskAdded }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ----- SIMPLE VALIDATION -----
-    if (!task.title.trim()) {
-      setError("Title is required");
-      return;
-    }
-    if (!task.description.trim()) {
-      setError("Description is required");
-      return;
-    }
-    if (!task.status) {
-      setError("Status is required");
-      return;
-    }
-    if (!task.dueDate) {
-      setError("Due date is required");
+    if (!task.title || !task.description || !task.dueDate) {
+      setError("All fields are required");
       return;
     }
 
     try {
-      setError(""); // clear previous errors
+      setError("");
 
-      // Send payload exactly as backend expects
-      await createTask({
-        title: task.title.trim(),
-        description: task.description.trim(),
-        status: task.status,         // must match enum exactly
-        dueDate: task.dueDate,       // format YYYY-MM-DD
+      await createTask(task);
+
+      setTask({
+        title: "",
+        description: "",
+        status: "TODO",
+        dueDate: "",
       });
 
-      // Reset form
-      setTask({ title: "", description: "", status: "PENDING", dueDate: "" });
+      if (onTaskAdded) {
+        onTaskAdded();
+      }
 
-      // Notify parent
-      onTaskAdded();
     } catch (err) {
-      console.error("Task creation failed:", err.response?.data || err.message);
-      setError(err.response?.data?.message || "Failed to create task");
+      console.error("Create Task Error:", err.response?.data);
+      setError("Failed to create task");
     }
   };
 
@@ -66,36 +53,39 @@ function TaskForm({ onTaskAdded }) {
           className="form-input"
           placeholder="Title"
           value={task.title}
-          onChange={(e) => setTask({ ...task, title: e.target.value })}
-          required
+          onChange={(e) =>
+            setTask({ ...task, title: e.target.value })
+          }
         />
 
         <input
           className="form-input"
           placeholder="Description"
           value={task.description}
-          onChange={(e) => setTask({ ...task, description: e.target.value })}
-          required
+          onChange={(e) =>
+            setTask({ ...task, description: e.target.value })
+          }
         />
 
-      <select
-            className="form-select"
-            value={task.status}
-            onChange={(e) => setTask({ ...task, status: e.target.value })}
-            required
-      >
-        <option value="TODO">To Do</option>
-        <option value="IN_PROGRESS">In Progress</option>
-        <option value="DONE">Done</option>
-</select>
-
+        <select
+          className="form-select"
+          value={task.status}
+          onChange={(e) =>
+            setTask({ ...task, status: e.target.value })
+          }
+        >
+          <option value="TODO">To Do</option>
+          <option value="IN_PROGRESS">In Progress</option>
+          <option value="DONE">Done</option>
+        </select>
 
         <input
           className="form-input"
           type="date"
           value={task.dueDate}
-          onChange={(e) => setTask({ ...task, dueDate: e.target.value })}
-          required
+          onChange={(e) =>
+            setTask({ ...task, dueDate: e.target.value })
+          }
         />
 
         <button type="submit" className="form-button">

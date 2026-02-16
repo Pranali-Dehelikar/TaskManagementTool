@@ -5,9 +5,11 @@
   background-color: #ffffff;
   border-radius: 8px;
   padding: 18px;
+  width: 12cm;
   border: 2px solid black;  /* match task list */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   font-family: Arial, sans-serif;
+  margin-top: 10px;
 }
 
 .chart-title {

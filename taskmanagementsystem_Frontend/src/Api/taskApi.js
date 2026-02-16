@@ -8,3 +8,11 @@ export const searchTasks = (keyword) =>
   api.get("/tasks/search", {
     params: { keyword },
   });
+
+  export const getTasksByDate = (date, token) =>
+  api.get("/tasks/by-date", {
+    params: { date },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });

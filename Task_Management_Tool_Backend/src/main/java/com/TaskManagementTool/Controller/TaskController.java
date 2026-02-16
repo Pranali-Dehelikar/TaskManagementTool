@@ -1,10 +1,13 @@
 package com.TaskManagementTool.Controller;
 
 import com.TaskManagementTool.Entity.Task;
+import com.TaskManagementTool.Repository.TaskRepository;
 import com.TaskManagementTool.Service.TaskService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,8 @@ import java.util.List;
 public class TaskController {
 
     private final TaskService service;
+
+    private final TaskRepository taskRepository;
 
     @PostMapping
     public Task createTask(@RequestBody Task task) {
@@ -34,4 +39,15 @@ public class TaskController {
     public List<Task> search(@RequestParam String keyword) {
         return service.searchTasks(keyword);
     }
+
+    @GetMapping("/by-date")
+    public ResponseEntity<List<Task>> getTasksByDate(
+            @RequestParam("date") String date) {
+
+        LocalDate selectedDate = LocalDate.parse(date);
+        List<Task> tasks = taskRepository.findByDueDate(selectedDate);
+
+        return ResponseEntity.ok(tasks);
+    }
+
 }

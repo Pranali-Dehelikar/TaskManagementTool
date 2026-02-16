@@ -6,21 +6,21 @@
 .task-list-container {
   padding: 16px;
   margin-top: 0.1cm;
-  margin-left: 0cm;
+  margin-left: 0.3cm;
   margin-right: 40px;
 
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 
-  max-width: 600px;
+  max-width: 12cm;
   font-family: Arial, sans-serif;
   border: 2px solid black;
 }
 
 /* Heading */
 .task-list-container h2 {
-  margin-left: 5cm;
+  margin-left: 4cm;
   margin-bottom: 16px;
   font-size: 22px;
   color: #111827; /* black in light mode */

@@ -1,0 +1,105 @@
+/* ===============================
+   DASHBOARD CONTAINER
+================================ */
+
+.dashboard-container {
+  padding: 30px;
+  min-height: 100vh;
+  background: #f5f6fa;
+  transition: 0.3s ease;
+}
+
+/* Title container */
+.dashboard-title {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+/* Icon styling */
+.dashboard-icon {
+  font-size: 36;
+  padding: 12px;
+  border-radius: 12px;
+  color: #333;
+  display: flex;
+}
+
+/* Dark mode icon */
+.dashboard-container.dark .dashboard-icon {
+  color: whitesmoke;
+}
+
+.dashboard-container.dark {
+  background: #121212;
+  color: #ffffff;
+}
+
+.dashboard-container.dark .dashboard-title {
+  color: #d2c296;
+}
+
+/* Dark mode icon color */
+.dashboard-container.dark .dashboard-icon {
+  color: #d2c296;
+}
+
+/* Title */
+
+.dashboard-title {
+    margin-top: -0.5cm;
+  margin-left: 11cm;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.dashboard-icon {
+  font-size: 24px;
+  color: #785bc1;
+}
+
+/* ===============================
+   GRID LAYOUT
+================================ */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+/* Make task list full width */
+
+.dashboard-tasklist {
+  grid-column: 1 / -1;
+}
+
+/* ===============================
+   REMOVE ALL CARD STYLING
+================================ */
+
+.dashboard-calendar,
+.dashboard-chart,
+.dashboard-tasklist {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-tasklist {
+    grid-column: auto;
+  }
+}

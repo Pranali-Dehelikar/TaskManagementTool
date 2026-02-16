@@ -99,5 +99,5 @@
 .notification-grid-save-btn:hover {
   background-color: var(--button-hover-bg);
   border-color: var(--button-hover-border);
-  color: var(--button-hover-text);
+  color: black;
 }
