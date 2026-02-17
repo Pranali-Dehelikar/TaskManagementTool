@@ -1,5 +1,6 @@
 package com.TaskManagementTool.Controller;
 
+import com.TaskManagementTool.Entity.GoogleFormTask;
 import com.TaskManagementTool.Entity.Task;
 import com.TaskManagementTool.Repository.TaskRepository;
 import com.TaskManagementTool.Service.TaskService;
@@ -48,6 +49,19 @@ public class TaskController {
         List<Task> tasks = taskRepository.findByDueDate(selectedDate);
 
         return ResponseEntity.ok(tasks);
+    }
+
+    @PostMapping("/{id}/check")
+    public Task checkTaskScore(@PathVariable Long id) {
+        return service.checkTaskScore(id);
+    }
+
+    @PatchMapping("/{id}/status")
+    public Task updateStatus(
+            @PathVariable Long id,
+            @RequestParam String status
+    ) {
+        return service.updateTaskStatus(id, status);
     }
 
 }

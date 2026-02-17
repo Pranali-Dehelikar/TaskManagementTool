@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import TaskList from "./TaskList";
 import TaskStatusChart from "./TaskStatusChart";
 import TaskCalendar from "./TaskCalendar";
 import { getAllTasks } from "../Api/taskApi";
-
 import { FaTachometerAlt } from "react-icons/fa";
-
-
 import "../Styles/Dashboard.css";
 
 const Dashboard = ({ token, darkMode }) => {
@@ -14,7 +11,7 @@ const Dashboard = ({ token, darkMode }) => {
   const [loadingTasks, setLoadingTasks] = useState(false);
   const [taskError, setTaskError] = useState("");
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     if (!token) return;
 
     try {
@@ -22,29 +19,25 @@ const Dashboard = ({ token, darkMode }) => {
       const res = await getAllTasks(token);
       setTasks(res.data || []);
       setTaskError("");
-    } catch (error) {
+    } catch {
       setTaskError("Failed to load tasks");
     } finally {
       setLoadingTasks(false);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
 
   return (
     <div className={`dashboard-container ${darkMode ? "dark" : ""}`}>
-     <h1 className="dashboard-title">
-  <FaTachometerAlt className="dashboard-icon" />
-  Dashboard
-</h1>
-
-
-
+      <h1 className="dashboard-title">
+        <FaTachometerAlt className="dashboard-icon" />
+        Dashboard
+      </h1>
 
       <div className="dashboard-grid">
-
         <div className="dashboard-calendar">
           <TaskCalendar
             setTasks={setTasks}
@@ -65,7 +58,6 @@ const Dashboard = ({ token, darkMode }) => {
             darkMode={darkMode}
           />
         </div>
-
       </div>
     </div>
   );

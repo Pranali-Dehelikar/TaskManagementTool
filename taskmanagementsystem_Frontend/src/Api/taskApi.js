@@ -16,3 +16,21 @@ export const searchTasks = (keyword) =>
       Authorization: `Bearer ${token}`,
     },
   });
+
+
+/* Check Google Form score and update status */
+export const checkTaskScore = (id, token) =>
+  api.post(`/tasks/${id}/check`, null, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+/* Manually update task status (if needed) */
+export const updateTaskStatus = (id, status, token) =>
+  api.patch(`/tasks/${id}/status`, null, {
+    params: { status },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });

@@ -1,13 +1,15 @@
 package com.TaskManagementTool.Entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task {
 
     @Id
@@ -16,11 +18,16 @@ public class Task {
 
     private String title;
     private String description;
-    private String status;
+
+    private String status; // PENDING / PROCESS / DONE
+
+    private String googleFormUrl;
+
+    private Integer score;
+
     private Long assignedUserId;
 
     private LocalDate dueDate;
 
-
+    private String imageUrl;
 }
-

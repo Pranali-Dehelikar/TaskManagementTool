@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 import java.util.Optional;
 
 @Service
@@ -30,25 +29,28 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private GoogleSheetService googleSheetService;
+
     @Override
     public Task createTask(Task task) {
 
-        // Save task first
+        // Default values
+        task.setStatus("PENDING");
+        task.setScore(null);
+
         Task savedTask = repo.save(task);
 
         Long userId = savedTask.getAssignedUserId();
 
-        // Get notification settings
         Optional<NotificationSettings> optionalSettings =
                 settingsRepo.findByUserIdAndNotificationType(userId, "Task");
 
         if (optionalSettings.isPresent()) {
 
             NotificationSettings settings = optionalSettings.get();
-
             String message = "New Task Assigned: " + savedTask.getTitle();
 
-            // In-App Notification
             if (settings.isInAppEnabled()) {
                 Notification notification = new Notification();
                 notification.setUserId(userId);
@@ -59,15 +61,13 @@ public class TaskServiceImpl implements TaskService {
                 notificationRepo.save(notification);
             }
 
-            // Email Notification
             if (settings.isEmailEnabled()) {
                 emailService.sendEmail(
-                        "franklinsurya4@gmail.com",  // temporary fix
+                        "franklinsurya4@gmail.com",
                         "Task Assigned",
                         message
                 );
             }
-
         }
 
         return savedTask;
@@ -104,4 +104,35 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> getUserTasks(Long userId) {
         return repo.findByAssignedUserId(userId);
     }
+
+    @Override
+    public Task checkTaskScore(Long taskId) {
+
+        Task task = repo.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        int score = googleSheetService.fetchScoreFromGoogleForm(task.getGoogleFormUrl());
+
+        task.setScore(score);
+
+        if (score >= 5) {
+            task.setStatus("DONE");
+        } else {
+            task.setStatus("PENDING");
+        }
+
+        return repo.save(task);
+    }
+
+    @Override
+    public Task updateTaskStatus(Long taskId, String status) {
+
+        Task task = repo.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        task.setStatus(status);
+
+        return repo.save(task);
+    }
+
 }

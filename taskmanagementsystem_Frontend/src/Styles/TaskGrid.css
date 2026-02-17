@@ -1,0 +1,119 @@
+.grid {
+  padding: 20px;
+  background-color: #fff; /* default light mode background */
+  color: #000;           /* default text color */
+  transition: all 0.3s ease;
+}
+
+.grid.dark {
+  background-color: #121212; /* dark background */
+  color: #fff;
+}
+
+.grid h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+  gap: 20px;
+}
+
+.card {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid black;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.grid.dark h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color:  #d2c296;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* space between icon and text */
+}
+
+.task-icon {
+  color: #785bc1; /* same color as navbar icon / buttons */
+}
+
+/* Dark mode for h1 icon */
+.grid.dark h1 .task-icon {
+  color: #a070ff;
+}
+
+
+.grid.dark .card {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 2px solid #444; /* softer border in dark mode */
+  box-shadow: 0 2px 5px rgba(255,255,255,0.05);
+}
+
+.task-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.check-btn {
+  padding: 5px 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+   border-radius: 6px;
+  background: #d5cc4b;
+  border: 2px solid red;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.grid.dark .check-btn {
+  background-color: #785bc1;
+  color: #f3f4f6;
+  border: 2px solid rgb(201, 234, 13);
+}
+
+.check-btn:hover {
+   background-color: rgba(128,128,128,0.667);
+  border: 2px solid white;
+  color: #000000cc;
+  transform: translate(2px,2px);
+}
+
+.grid.dark .check-btn:hover {
+  opacity: 0.8;
+  background-color: #9ca3af;
+  color: black;
+  border: 2px solid rgb(211, 58, 12);
+}
+
+/* Responsive: 2 cards per row on smaller screens */
+@media (max-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: 1 card per row */
+@media (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}

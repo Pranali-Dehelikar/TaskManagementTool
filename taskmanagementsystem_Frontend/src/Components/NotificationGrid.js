@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { NOTIFICATION_TYPES, NOTIFICATION_CHANNELS } from "../Constants/notifications";
 import { getUserNotifications, saveUserNotifications } from "../Api/notificationApi";
-import "../Styles/NotificationGrid.css"; // Make sure this exists
+import "../Styles/NotificationGrid.css";
 
 const NotificationGrid = ({ userId, darkMode }) => {
-  const initialSettings = NOTIFICATION_TYPES.reduce((acc, type) => {
-    acc[type] = NOTIFICATION_CHANNELS.reduce((chAcc, channel) => {
-      chAcc[channel] = false;
-      return chAcc;
+
+  const initialSettings = useMemo(() => {
+    return NOTIFICATION_TYPES.reduce((acc, type) => {
+      acc[type] = NOTIFICATION_CHANNELS.reduce((chAcc, channel) => {
+        chAcc[channel] = false;
+        return chAcc;
+      }, {});
+      return acc;
     }, {});
-    return acc;
-  }, {});
+  }, []);
 
   const [settings, setSettings] = useState(initialSettings);
 
@@ -29,8 +32,8 @@ const NotificationGrid = ({ userId, darkMode }) => {
         });
         setSettings(formatted);
       })
-      .catch(err => console.error("Failed to load notifications:", err));
-  }, [userId]);
+      .catch(err => console.error(err));
+  }, [userId, initialSettings]);
 
   const handleToggle = (type, channel) => {
     setSettings(prev => ({
@@ -46,9 +49,10 @@ const NotificationGrid = ({ userId, darkMode }) => {
       pushEnabled: settings[type]["Push Notification"],
       inAppEnabled: settings[type]["In-App Alert"]
     }));
+
     saveUserNotifications(userId, payload)
       .then(() => alert("Settings saved successfully"))
-      .catch(err => console.error("Failed to save notifications:", err));
+      .catch(err => console.error(err));
   };
 
   return (
@@ -57,7 +61,9 @@ const NotificationGrid = ({ userId, darkMode }) => {
         <thead>
           <tr>
             <th>Notification Type</th>
-            {NOTIFICATION_CHANNELS.map(channel => <th key={channel}>{channel}</th>)}
+            {NOTIFICATION_CHANNELS.map(channel => (
+              <th key={channel}>{channel}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -68,7 +74,6 @@ const NotificationGrid = ({ userId, darkMode }) => {
                 <td key={channel}>
                   <input
                     type="checkbox"
-                    className="notification-grid-checkbox"
                     checked={settings[type][channel]}
                     onChange={() => handleToggle(type, channel)}
                   />
@@ -78,9 +83,7 @@ const NotificationGrid = ({ userId, darkMode }) => {
           ))}
         </tbody>
       </table>
-      <button className="notification-grid-save-btn" onClick={handleSave}>
-        Save Settings
-      </button>
+      <button onClick={handleSave}>Save Settings</button>
     </div>
   );
 };

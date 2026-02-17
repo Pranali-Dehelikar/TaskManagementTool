@@ -15,4 +15,11 @@ public interface TaskService {
     List<TaskReportDto> getTaskReportData(String keyword);
 
     List<Task> getUserTasks(Long userId);
+
+    Task checkTaskScore(Long taskId);
+
+    Task updateTaskStatus(Long taskId, String status);
+
+
+
 }
