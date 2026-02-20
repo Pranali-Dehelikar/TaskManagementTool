@@ -14,7 +14,6 @@ import "./Navbar.css";
 const Navbar = ({ activeComponent, setActiveComponent, darkMode }) => {
 
   const menuItems = [
-    { name: "TaskForm", label: "Add Task", icon: faTasks },
     { name: "TaskList", label: "List of Tasks", icon: faList }, // ✅ This now works
     { name: "Reports", label: "Reports", icon: faChartBar },
     { name: "Dashboard", label: "Dashboard", icon: faTachometerAlt },

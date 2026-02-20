@@ -1,0 +1,184 @@
+/* ===================== Container ===================== */
+.task-preference {
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #1f1f1f;
+  background-color: #f5f5f5; /* light mode */
+  color: #1f1f1f;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 20px auto;
+  transition: all 0.3s ease;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden; /* prevent vertical scroll */
+}
+
+.task-preference.dark {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================== Title ===================== */
+.task-preference h1 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* ===================== Filters Wrapper ===================== */
+.filters-section-wrapper {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.language-section,
+.task-filter-section {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.language-section h3,
+.task-filter-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  border-bottom: 2px solid #4a5de7;
+  padding-bottom: 3px;
+}
+
+/* ===================== Select Boxes ===================== */
+.language-section select,
+.task-filter-section select {
+  padding: 6px 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #1f1f1f;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.task-preference.dark .language-section select,
+.task-preference.dark .task-filter-section select {
+  background-color: #2c2c2c;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+/* ===================== Tasks Grid ===================== */
+.favourite-tasks-section h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #4a5de7;
+  padding-bottom: 3px;
+}
+
+ul.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+li.task-card {
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  color:#1f1f1f;
+}
+
+.task-preference.dark li.task-card {
+  background-color: #2c2c2c;
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.05);
+}
+
+li.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+li.task-card input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #4a5de7;
+}
+
+.task-title {
+  font-weight: 500;
+}
+
+.task-status {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.task-preference.dark .task-status {
+  color: #bbb;
+}
+
+/* ===================== Save Button ===================== */
+.save-section {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.save-button {
+  background-color: #d5cc4b;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-button:hover {
+  background-color: rgba(128,128,128,0.667);
+  border: 2px solid white;
+  color: #000000cc;
+  transform: translate(2px,2px);
+}
+
+.task-preference.dark .save-button {
+  background-color: #785bc1;
+}
+
+.task-preference.dark .save-button:hover {
+   opacity: 0.8;
+  background-color: #9ca3af;
+  color: black;
+  border: 2px solid rgb(211, 58, 12);
+}
+
+/* ===================== Responsive ===================== */
+@media (max-width: 768px) {
+  .filters-section-wrapper {
+    flex-direction: column;
+  }
+
+  ul.task-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+  }
+
+  .save-button {
+    width: 100%;
+  }
+}

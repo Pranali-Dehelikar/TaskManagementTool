@@ -14,12 +14,7 @@ import {
 
 import "../Styles/Settings.css";
 
-const SettingsMenu = ({
-  darkMode,
-  setDarkMode,
-  onLogout,
-  setActiveComponent
-}) => {
+const SettingsMenu = ({ darkMode, setDarkMode, onLogout, setActiveComponent }) => {
 
   const settingsCards = [
     { title: "Account", icon: faUser },
@@ -32,7 +27,6 @@ const SettingsMenu = ({
     { title: "Help & About", icon: faInfoCircle }
   ];
 
-  // <-- REPLACE YOUR OLD handleCardClick WITH THIS
   const handleCardClick = (title) => {
     switch (title) {
       case "Account":
@@ -40,11 +34,15 @@ const SettingsMenu = ({
         break;
 
       case "Notifications":
-        setActiveComponent("Notification"); // triggers NotificationGrid in App.js
+        setActiveComponent("Notification");
         break;
 
       case "Appearance":
         setDarkMode(!darkMode);
+        break;
+
+      case "Task Preferences":
+        setActiveComponent("Preferences"); // ✅ updated to match App.js
         break;
 
       case "Privacy & Security":
@@ -52,7 +50,7 @@ const SettingsMenu = ({
         break;
 
       default:
-        console.log(title + " clicked");
+        console.log(`${title} clicked`);
     }
   };
 

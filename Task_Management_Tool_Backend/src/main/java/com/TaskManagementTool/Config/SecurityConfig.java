@@ -36,8 +36,11 @@ public class SecurityConfig {
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/error").permitAll()
                                 .requestMatchers("/**").permitAll() // Temporary: allow all for testing OPTIONS / CORS
+                        .requestMatchers("/api/openai/**").permitAll()// allow openai endpoint
                         .requestMatchers("/api/notifications/**").authenticated()
                         .requestMatchers("/api/tasks/**").authenticated()
+                        .requestMatchers("/api/preferences/**").authenticated()
+
                         .anyRequest().authenticated() // Uncomment once JWT works
                 );
 
